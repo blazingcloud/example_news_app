@@ -13,21 +13,27 @@ describe Article do
     Article.new(@valid_attrs).should be_valid
   end
 
-  it "can have a unknown pub date" do
+  it "may have a unknown pub date" do
     @valid_attrs[:published_on] = nil
     Article.new(@valid_attrs).should be_valid
   end
 
-  it "must have an author" do
+  it "must have a title" do
     @invalid_attrs = @valid_attrs.clone
-    @invalid_attrs.delete(:author)
-    Article.new(@valid_attrs).should_not be_valid
+    @invalid_attrs.delete(:title)
+    Article.new(@invalid_attrs).should_not be_valid
+  end
+  
+  it "must have an url" do
+    @invalid_attrs = @valid_attrs.clone
+    @invalid_attrs.delete(:url)
+    Article.new(@invalid_attrs).should_not be_valid
   end
 
   it "must have an author" do
     @invalid_attrs = @valid_attrs.clone
     @invalid_attrs.delete(:author)
-    Article.new(@valid_attrs).should_not be_valid
+    Article.new(@invalid_attrs).should_not be_valid
   end
 
 end
