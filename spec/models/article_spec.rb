@@ -18,6 +18,12 @@ describe Article do
     Article.new(@valid_attrs).should be_valid
   end
 
+  it "may have a unknown author" do
+    @valid_attrs[:author] = nil
+    Article.new(@valid_attrs).should be_valid
+  end
+
+
   it "must have a title" do
     @invalid_attrs = @valid_attrs.clone
     @invalid_attrs.delete(:title)
@@ -27,12 +33,6 @@ describe Article do
   it "must have an url" do
     @invalid_attrs = @valid_attrs.clone
     @invalid_attrs.delete(:url)
-    Article.new(@invalid_attrs).should_not be_valid
-  end
-
-  it "must have an author" do
-    @invalid_attrs = @valid_attrs.clone
-    @invalid_attrs.delete(:author)
     Article.new(@invalid_attrs).should_not be_valid
   end
 
